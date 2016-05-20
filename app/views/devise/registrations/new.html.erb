@@ -19,6 +19,13 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
     <div class="register-box">
+      <% if notice %>
+        <div class="alert alert-success alert-dismissable">
+          <i class="fa fa-check"></i>
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <b><%= notice %></b>
+        </div>
+      <% end %>
       <div class="register-logo">
         <a href="../../index2.html"><b>Admin</b>LTE</a>
       </div>

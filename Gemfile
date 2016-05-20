@@ -49,6 +49,8 @@ end
 gem 'annotate', '~> 2.6', '>= 2.6.10'
 #bootstrap
 gem 'bootstrap-sass' #enables bootstrap in te app
+#paginating lists
+gem 'will_paginate-bootstrap'
 #date formatting
 gem 'groupdate'
 #twitter
@@ -57,5 +59,7 @@ gem 'twitter'
 gem 'adminlte2-rails'
 #chart.js
 gem 'chartjs-ror'
-
+#user management
 gem 'devise'
+#haml
+gem 'haml-rails'

@@ -1,0 +1,33 @@
+.col-xs-12
+  .box
+    .box-header
+      %h3.box-title Registered Users
+      .box-tools
+        .input-group.input-group-sm{:style => "width: 150px;"}
+          %input.form-control.pull-right{:name => "table_search", :placeholder => "Search", :type => "text"}
+            .input-group-btn
+              %button.btn.btn-default{:type => "submit"}
+                %i.fa.fa-search
+    / /.box-header
+    .box-body.table-responsive.no-padding
+      %table.table.table-hover
+        %tbody
+          %tr
+            %th Full Names
+            %th Email
+            %th settings
+        - users.each do |user|
+          %tr
+            %td= user.full_names
+            %td= user.email
+            %td
+              -if current_user && current_user.is_admin?
+                = link_to 'Show Details',  user, class: "label label-warning"
+                = link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: "label label-danger"
+                -unless current_user == user
+                  -if user.is_moderator?
+                    = link_to " Moderator - Make Normal user", user_make_normal_user_path(user), class: "label label-pill label-default"
+                  -elsif user.is_admin?
+                    = link_to " Admin Make Normal user",  user_make_normal_user_path(user), :data => { :confirm => 'Are you sure?' }, class: "label label-pill label-info"
+                  -else
+                    = link_to "Make moderator", user_make_moderator_path(user), :data => { :confirm => 'Are you sure?' }, class: "label label-success"

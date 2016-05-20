@@ -2,14 +2,20 @@ Rails.application.routes.draw do
 	devise_for :users
 	devise_scope :user do
 		authenticated :user do
-			root 'users#index'
+			root 'user#index'
 		end
 		unauthenticated :user do
 			root :to => 'devise/registrations#new', as: :unauthenticated_root
 		end
 	end
 
-	resources :user
+	resources :user do
+		get :make_moderator
+		get :make_normal_user
+		delete 'user/:id' => 'user#destroy', :via => :delete #, :as => :admin_destroy_user
+		get 'user/:id' => 'user#show', as: :user
+	end
+	# root 'user#index'
 
 	# The priority is based upon order of creation: first created -> highest priority.
 	# See how all your routes lay out with "rake routes".

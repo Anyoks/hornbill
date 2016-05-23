@@ -63,3 +63,7 @@ gem 'chartjs-ror'
 gem 'devise'
 #haml
 gem 'haml-rails'
+#friendly urls
+gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
+#file uploads
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"

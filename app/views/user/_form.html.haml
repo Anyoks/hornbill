@@ -1,0 +1,44 @@
+= form_for @user, :html => {:class => 'form-horizontal'} do |f|
+  %form.form-horizontal
+    - if @user.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@user.errors.count, "error")
+          prohibited this user from being saved:
+        %ul
+          - @user.errors.full_messages.each do |message|
+            %li= message
+
+    .form-group
+      %label.col-sm-2.control-label{:for => "inputName"} First Name
+      .col-sm-10
+        = f.text_field :first_name, class: "form-control", :placeholder => "First Name"
+    .form-group
+      %label.col-sm-2.control-label{:for => "inputName"} Last Name
+      .col-sm-10
+        = f.text_field :last_name, class: "form-control", :placeholder => "Last Name"
+    .form-group
+      %label.col-sm-2.control-label{:for => "inputEmail"} Email
+      .col-sm-10
+        = f.text_field :email, class: "form-control", :placeholder => "Email"
+    .form-group
+      %label.col-sm-2.control-label{:for => "password"} Password
+      .col-sm-10
+        = f.text_field :password, class: "form-control", :placeholder => "Password"
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        .checkbox
+          %label
+            %input{:type => "checkbox"}
+              I agree to the
+              %a{:href => "#"} terms and conditions
+    .box-body
+      .form-group
+        %label{:for => "exampleInputFile"} File input
+        = f.file_field :avatar
+        %p.help-block Example block-level help text here
+
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        / %button.btn.btn-danger{:type => "submit"} Submit
+        = f.submit 'Update', class: 'btn btn-danger'

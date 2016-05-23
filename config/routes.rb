@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 		get :make_moderator
 		get :make_normal_user
 		delete 'user/:id' => 'user#destroy', :via => :delete #, :as => :admin_destroy_user
-		get 'user/:id' => 'user#show', as: :user
+		get 'user/:id' => 'user#show'
 	end
 	# root 'user#index'
 

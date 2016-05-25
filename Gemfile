@@ -67,3 +67,7 @@ gem 'haml-rails'
 gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 #file uploads
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+#Chart plotting
+gem 'chartjs-ror'
+#group date data
+gem "groupdate"

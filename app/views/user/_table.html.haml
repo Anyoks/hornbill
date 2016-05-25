@@ -31,3 +31,77 @@
                     = link_to " Admin Make Normal user",  user_make_normal_user_path(user), :data => { :confirm => 'Are you sure?' }, class: "label label-pill label-info"
                   -else
                     = link_to "Make moderator", user_make_moderator_path(user), :data => { :confirm => 'Are you sure?' }, class: "label label-success"
+
+.row
+  .col-md-6
+    .box.box-danger
+      .box-header.with-border
+        %h3.box-title Pie Chart
+        .box-tools.pull-right
+          %button.btn.btn-box-tool{"data-widget" => "collapse", :type => "button"}
+            %i.fa.fa-minus
+          %button.btn.btn-box-tool{"data-widget" => "remove", :type => "button"}
+            %i.fa.fa-times
+      .box-body
+        = pie_chart @data, @options
+
+  .col-md-6
+    .box.box-danger
+      .box-header.with-border
+        %h3.box-title Donut Chart
+        .box-tools.pull-right
+          %button.btn.btn-box-tool{"data-widget" => "collapse", :type => "button"}
+            %i.fa.fa-minus
+          %button.btn.btn-box-tool{"data-widget" => "remove", :type => "button"}
+            %i.fa.fa-times
+      .box-body
+        = doughnut_chart @data, @options1
+
+
+  .col-md-6
+    .box.box-success
+      .box-header.with-border
+        %h3.box-title Line Chart
+        .box-tools.pull-right
+          %button.btn.btn-box-tool{"data-widget" => "collapse", :type => "button"}
+            %i.fa.fa-minus
+          %button.btn.btn-box-tool{"data-widget" => "remove", :type => "button"}
+            %i.fa.fa-times
+      .box-body
+        = line_chart @data, @options2
+
+  .col-md-6
+    .box.box-success
+      .box-header.with-border
+        %h3.box-title Polar Chart
+        .box-tools.pull-right
+          %button.btn.btn-box-tool{"data-widget" => "collapse", :type => "button"}
+            %i.fa.fa-minus
+          %button.btn.btn-box-tool{"data-widget" => "remove", :type => "button"}
+            %i.fa.fa-times
+      .box-body
+        = polar_area_chart @data, @options3
+
+  .col-md-6
+    .box.box-success
+      .box-header.with-border
+        %h3.box-title Radar Chart
+        .box-tools.pull-right
+          %button.btn.btn-box-tool{"data-widget" => "collapse", :type => "button"}
+            %i.fa.fa-minus
+          %button.btn.btn-box-tool{"data-widget" => "remove", :type => "button"}
+            %i.fa.fa-times
+      .box-body
+        = radar_chart @data, @options4
+
+  .col-md-6
+    .box.box-success
+      .box-header.with-border
+        %h3.box-title Bar Chart
+        .box-tools.pull-right
+          %button.btn.btn-box-tool{"data-widget" => "collapse", :type => "button"}
+            %i.fa.fa-minus
+          %button.btn.btn-box-tool{"data-widget" => "remove", :type => "button"}
+            %i.fa.fa-times
+      .box-body
+        = bar_chart @data, @options5

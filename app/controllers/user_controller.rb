@@ -5,6 +5,49 @@ class UserController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    data = []
+    lables = User.group_by_month(:created_at).count
+    @data = {
+      labels: lables.map {|label, data| label.strftime("%B") },
+      datasets: [
+        {
+           # label: "My First dataset",
+           # pointStrokeColor: "#FFA500",
+           # fillColor: "rgba(255,165,0,0.5)",
+           # pointColor: "rgba(255,165,0,1)",
+           # strokeColor: "rgba(255,165,0,1)",
+           data: lables.map {|label, data| data  },
+           backgroundColor: "#FF6384",
+           hoverBackgroundColor: "#FF6384"
+
+        }
+      ]
+    }
+    @options = {:height => "253", :width => "507"}
+    # byebug
+
+    @data2 = {
+      labels: lables.map {|label, data| label.strftime("%B") },
+      datasets: [
+        {
+           label: "My First dataset",
+           pointStrokeColor: "#FFA500",
+           fillColor: "rgba(255,165,0,0.5)",
+           pointColor: "rgba(255,165,0,1)",
+           strokeColor: "rgba(255,165,0,1)",
+           data: lables.map {|label, data| data  },
+           # backgroundColor: "#FF6384",
+           # hoverBackgroundColor: "#FF6384"
+
+        }
+      ]
+    }
+    @options1 = {:height => "253", :width => "507"}
+    @options2 = {:height => "253", :width => "507"}
+    @options3 = {:height => "253", :width => "507"}
+    @options4 = {:height => "253", :width => "507"}
+    @options5 = {:height => "253", :width => "507"}
+    # byebug
   end
 
   # GET /users/1

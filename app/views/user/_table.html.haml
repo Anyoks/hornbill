@@ -23,8 +23,9 @@
             %td
               -if current_user && current_user.is_admin?
                 = link_to 'Show Details',  user, class: "label label-warning"
-                = link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: "label label-danger"
+                
                 -unless current_user == user
+                  = link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: "label label-danger"
                   -if user.is_moderator?
                     = link_to " Moderator - Make Normal user", user_make_normal_user_path(user), class: "label label-pill label-default"
                   -elsif user.is_admin?

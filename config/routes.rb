@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-	devise_for :users
+  resources :authentications
+	devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 	devise_scope :user do
 		authenticated :user do
 			root 'user#index'
@@ -15,6 +16,8 @@ Rails.application.routes.draw do
 		delete 'user/:id' => 'user#destroy', :via => :delete #, :as => :admin_destroy_user
 		get 'user/:id' => 'user#show'
 	end
+
+	# get '/auth/twitter/callback' => 'session#create'
 	# root 'user#index'
 
 	# The priority is based upon order of creation: first created -> highest priority.

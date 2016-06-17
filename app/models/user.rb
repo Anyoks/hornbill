@@ -2,15 +2,29 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:twitter]
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
     validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   belongs_to :role
   before_create :set_default_role
+  has_many :authentications
 
   extend FriendlyId
     friendly_id :full_names, use: :slugged
+
+
+  #******************Omniauth********************#
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      byebug
+      user.password = Devise.friendly_token[0,20]
+      user.first_name = auth.info.name   # assuming the user model has a name
+      user.avatar = auth.info.image # assuming the user model has an image
+    end
+  end
+  #********************End************************#
 
  
 #*******************User Admin Methods************#

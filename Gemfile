@@ -67,7 +67,15 @@ gem 'haml-rails'
 gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 #file uploads
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
-#Chart plotting
-gem 'chartjs-ror'
-#group date data
-gem "groupdate"
+#O-auth Authentication
+gem 'omniauth'
+#twitter Authentication using omniauth
+gem 'omniauth-twitter'
+#Hiding secrect keys
+gem "figaro"
+#nifty
+gem 'nifty-generators'
+#moving sessions to active record to avoid 4kb limit
+gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
+
+# gem 'mocha', group: :test

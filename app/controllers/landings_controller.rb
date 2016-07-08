@@ -1,7 +1,8 @@
 class LandingsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :create
   before_action :set_landing, only: [:show, :edit, :update, :destroy]
-  layout 'home'
+  layout 'home', only: [:index, :update, :destroy]
+  layout 'admin_lte_2', only: [:show]
   # GET /landings
   # GET /landings.json
   def index
@@ -26,12 +27,13 @@ class LandingsController < ApplicationController
   # POST /landings
   # POST /landings.json
   def create
+    
     @landing = Landing.new(landing_params)
 
     respond_to do |format|
       if @landing.save
-        format.html { redirect_to @landing, notice: 'Landing was successfully created.' }
-        format.json { render :show, status: :created, location: @landing }
+          format.html { redirect_to @landing, notice: 'Landing was successfully created.' }
+          format.json { render :show, status: :created, location: @landing }
       else
         format.html { render :new }
         format.json { render json: @landing.errors, status: :unprocessable_entity }
@@ -61,6 +63,16 @@ class LandingsController < ApplicationController
       format.html { redirect_to landings_url, notice: 'Landing was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def check_user_with_twitter_login
+    # byebug
+    if  current_user.authentications.empty?
+        false
+      else
+        true
+    end
+
   end
 
   private

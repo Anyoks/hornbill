@@ -8,20 +8,45 @@ class User < ActiveRecord::Base
 
   belongs_to :role
   before_create :set_default_role
-  has_many :authentications
+  has_many :authentications, dependent: :destroy
 
   extend FriendlyId
     friendly_id :full_names, use: :slugged
 
 
   #******************Omniauth********************#
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      byebug
-      user.password = Devise.friendly_token[0,20]
-      user.first_name = auth.info.name   # assuming the user model has a name
-      user.avatar = auth.info.image # assuming the user model has an image
+  # def self.from_omniauth(auth, provider_type)
+  #   self.email = auth[:info][:email] if self.email.blank?
+  #   case provider_type
+  #     when :twitter
+  #       name = auth[:info][:name].split(' ')
+  #       self.first_name ||= name[0]
+  #       self.last_name ||= name[1]
+  #       self.avatar = auth.info.image
+
+  #   # where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+  #   #   user.email = auth.info.email
+  #   #   byebug
+  #   #   user.password = Devise.friendly_token[0,20]
+  #   #   user.first_name = auth.info.name   # assuming the user model has a name
+  #   #   user.avatar = auth.info.image # assuming the user model has an image
+  #   end
+  # end
+
+  def update_from_oauth(auth, provider_type)
+    self.email = auth[:info][:email] if self.email.blank?
+    case provider_type
+    when :twitter
+      name = auth[:info][:name].split(' ')
+      self.first_name ||= name[0]
+      self.last_name ||= name[1]
+      # self.remote_avatar_url = auth[:extra][:raw_info][:profile_image_url]
+      self.avatar = auth.info.image
+
+    # when :facebook
+    #   ...
+    # when :google
+    #   ...
     end
   end
   #********************End************************#

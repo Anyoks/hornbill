@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 		delete 'user/:id' => 'user#destroy', :via => :delete #, :as => :admin_destroy_user
 		get 'user/:id' => 'user#show'
 	end
+	resources :landings
 
 	# get '/auth/twitter/callback' => 'session#create'
 	# root 'user#index'
